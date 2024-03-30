@@ -8,14 +8,13 @@ const Hero = async () => {
   const res = await getPages();
   const data = res?.data.find((i: PageType) => i.pageUrl === "home")
     ?.attributeValues.en_US;
-  console.log(data);
   return (
     <div>
       {data && (
-        <div className="md:w-[90%] w-[95%] m-auto h-[90vh] md:flex items-center">
+        <div className="md:w-[90%] w-[95%] m-auto md:h-[90vh] md:flex items-center">
           <div className="md:w-[50%] w-full">
             <h1
-              className="md:text-6xl 2xl:text-7xl font-semibold font-Poppins"
+              className="pt-5 md:pt-0 text-3xl md:text-6xl 2xl:text-7xl font-semibold font-Poppins"
               dangerouslySetInnerHTML={{
                 __html: data?.title?.value[0]?.htmlValue,
               }}

@@ -10,9 +10,9 @@ const Footer = async () => {
 
   return (
     <div>
-      <div className="w-[90%] m-auto flex justify-between border-b mb-8">
-        <div>
-          <Link href={"/"} className="flex items-center">
+      <div className="w-[90%] text-center md:text-left m-auto md:flex justify-between border-b mb-8">
+        <div className="w-full md:w-[unset] text-center md:text-left">
+          <Link href={"/"} className="flex items-center justify-center md:justify-start">
             <h5 className="text-3xl text-[#001858] font-[500] font-Poppins">
               {logo}
             </h5>
@@ -23,7 +23,7 @@ const Footer = async () => {
           <span className="font-Poppins text-lg pt-8">
             Becodemy by Shahriar Sajeeb
           </span>
-          <div className="flex items-center my-3 gap-3 text-xl">
+          <div className="flex items-center justify-center md:justify-start my-3 gap-3 text-xl">
             <Link href={"/"}>
               <span>{ICONS.medium}</span>
             </Link>
