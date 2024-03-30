@@ -62,6 +62,7 @@ const Page = async ({ params }: any) => {
                   res?.data.attributeValues.en_US["blog-content"]?.value[0]
                     ?.htmlValue,
               }}
+              className="w-full overflow-hidden"
             />
             <br />
           </div>
