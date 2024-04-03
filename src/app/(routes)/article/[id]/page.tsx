@@ -1,19 +1,19 @@
-import { getSingleBlog } from "@/actions/getSingleBlog";
+import { API } from "@/libs/api";
 import Image from "next/image";
 
 const Page = async ({ params }: any) => {
+  const { Products } = API();
   const articleId = params.id;
-  const res = await getSingleBlog({ id: articleId });
-
+  const value = await Products.getProductById(articleId, "en_US");
+  
   return (
     <>
-      {res?.data && (
+      {value && (
         <div className="w-full border-b mb-5">
           <div className="w-[80%] m-auto">
             <Image
               src={
-                res?.data?.attributeValues?.en_US["blog-thumbnail"]?.value[0]
-                  ?.downloadLink
+                value?.attributeValues["blog-thumbnail"]?.value?.downloadLink
               }
               alt=""
               width={500}
@@ -21,7 +21,7 @@ const Page = async ({ params }: any) => {
               className="w-full object-contain my-5"
             />
             <h1 className="text-4xl text-center">
-              {res?.data.attributeValues.en_US["blog-title"].value[0].header}
+              {value?.attributeValues["blog-title"].value.header}
             </h1>
             <br />
             <br />
@@ -29,8 +29,8 @@ const Page = async ({ params }: any) => {
               <div className="flex">
                 <Image
                   src={
-                    res?.data?.attributeValues.en_US["blog-user-avatar"]
-                      ?.value[0].downloadLink
+                    value?.attributeValues["blog-user-avatar"]?.value
+                      .downloadLink
                   }
                   alt=""
                   width={40}
@@ -41,13 +41,13 @@ const Page = async ({ params }: any) => {
                   <div
                     dangerouslySetInnerHTML={{
                       __html:
-                        res?.data?.attributeValues.en_US["blog-user-name"]
-                          ?.value[0].htmlValue,
+                        value?.attributeValues["blog-user-name"]?.value
+                          .htmlValue,
                     }}
                   />
                   <span>
                     {
-                      res?.data?.attributeValues.en_US["blog-created-at"]?.value
+                      value?.attributeValues["blog-created-at"]?.value
                         ?.formattedValue
                     }
                   </span>{" "}
@@ -58,9 +58,7 @@ const Page = async ({ params }: any) => {
             <br />
             <p
               dangerouslySetInnerHTML={{
-                __html:
-                  res?.data.attributeValues.en_US["blog-content"]?.value[0]
-                    ?.htmlValue,
+                __html: value.attributeValues["blog-content"]?.value?.htmlValue,
               }}
               className="w-full overflow-hidden"
             />

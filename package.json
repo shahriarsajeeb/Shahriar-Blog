@@ -12,6 +12,7 @@
     "@nextui-org/react": "^2.2.10",
     "framer-motion": "^11.0.24",
     "next": "14.1.4",
+    "oneentry": "^1.0.59",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.0.1"

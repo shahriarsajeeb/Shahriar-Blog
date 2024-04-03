@@ -1,18 +1,24 @@
-import { getPages } from "@/actions/getPages";
 import { logo } from "@/app/configs/constants";
+import { API } from "@/libs/api";
 import { ICONS } from "@/utils/icons";
 import Link from "next/link";
+import { IPagesEntity } from "oneentry/dist/pages/pagesInterfaces";
 
 const Footer = async () => {
-  const res = await getPages();
-  const data = res?.data?.find((i: PageType) => i?.pageUrl === "home")
-    ?.attributeValues.en_US;
+  const { Pages } = API();
+  const value = await Pages?.getRootPages("en_US");
+  const data = value.find(
+    (i: IPagesEntity) => i.pageUrl === "home"
+  )?.attributeValues;
 
   return (
     <div>
       <div className="w-[90%] text-center md:text-left m-auto md:flex justify-between border-b mb-8">
         <div className="w-full md:w-[unset] text-center md:text-left">
-          <Link href={"/"} className="flex items-center justify-center md:justify-start">
+          <Link
+            href={"/"}
+            className="flex items-center justify-center md:justify-start"
+          >
             <h5 className="text-3xl text-[#001858] font-[500] font-Poppins">
               {logo}
             </h5>

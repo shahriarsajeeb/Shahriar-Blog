@@ -1,10 +1,12 @@
-import { getPages } from "@/actions/getPages";
 import { logo } from "@/app/configs/constants";
+import { API } from "@/libs/api";
 import { Button, Navbar } from "@nextui-org/react";
 import Link from "next/link";
+import { IPagesEntity } from "oneentry/dist/pages/pagesInterfaces";
 
 const Header = async () => {
-  const res = await getPages();
+  const { Pages } = API();
+  const value = await Pages.getPages("en_US");
 
   return (
     <Navbar
@@ -20,13 +22,13 @@ const Header = async () => {
           <span className="text-blue-800 font-[500] font-Poppins">.Blog</span>
         </Link>
         <div className="md:block hidden">
-          {res?.data?.map((i: PageType, index: number) => (
+          {value?.map((i: IPagesEntity, index: number) => (
             <Link
               href={`/${i.pageUrl === "home" ? "/" : i.pageUrl}`}
               key={index}
               className="text-xl px-8"
             >
-              {i.localizeInfos.en_US.title}
+              {i.localizeInfos.title}
             </Link>
           ))}
           <Button

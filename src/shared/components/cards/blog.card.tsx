@@ -1,30 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
+import { IProductsEntity } from "oneentry/dist/products/productsInterfaces";
 
-const BlogCard = ({ data }: { data: any }) => {
-  console.log(data);
+const BlogCard = ({ data }: { data: IProductsEntity }) => {
   return (
     <Link className="shadow p-3 my-2" href={`/article/${data.id}`}>
       <Image
-        src={
-          data?.attributeValues.en_US["blog-thumbnail"]?.value[0]?.downloadLink
-        }
+        src={data?.attributeValues["blog-thumbnail"]?.value?.downloadLink}
         alt=""
         width={300}
         height={250}
         className="w-full min-h-[200px] h-min rounded-lg object-contain"
       />
       <h1 className="text-xl pt-1 font-medium">
-        {data?.attributeValues.en_US["blog-title"]?.value[0]?.header}
+        {data?.attributeValues["blog-title"]?.value?.header}
       </h1>
       <br />
       <div className="w-full flex justify-between items-center">
         <div className="flex">
           <Image
-            src={
-              data?.attributeValues.en_US["blog-user-avatar"]?.value[0]
-                .downloadLink
-            }
+            src={data?.attributeValues["blog-user-avatar"]?.value.downloadLink}
             alt=""
             width={40}
             height={40}
@@ -34,17 +29,13 @@ const BlogCard = ({ data }: { data: any }) => {
             <div
               dangerouslySetInnerHTML={{
                 __html:
-                  data?.attributeValues.en_US["blog-user-name"]?.value[0]
-                    .htmlValue,
+                  data?.attributeValues["blog-user-name"]?.value.htmlValue,
               }}
             />
             <span>
-              {
-                data?.attributeValues.en_US["blog-created-at"]?.value
-                  ?.formattedValue
-              }
-            </span>
-            {" "}∙
+              {data?.attributeValues["blog-created-at"]?.value?.formattedValue}
+            </span>{" "}
+            ∙
           </div>
         </div>
       </div>

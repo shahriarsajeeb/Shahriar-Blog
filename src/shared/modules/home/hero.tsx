@@ -1,13 +1,18 @@
-import { getPages } from "@/actions/getPages";
+import { API } from "@/libs/api";
 import { ICONS } from "@/utils/icons";
 import { Button } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
+import { IPagesEntity } from "oneentry/dist/pages/pagesInterfaces";
 
 const Hero = async () => {
-  const res = await getPages();
-  const data = res?.data.find((i: PageType) => i.pageUrl === "home")
-    ?.attributeValues.en_US;
+  const { Pages } = API();
+  const value = await Pages?.getRootPages("en_US");
+
+  const data = value.find(
+    (i: IPagesEntity) => i.pageUrl === "home"
+  )?.attributeValues;
+
   return (
     <div>
       {data && (
